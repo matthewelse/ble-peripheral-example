@@ -1,0 +1,17 @@
+{
+  "name": "ble-application",
+  "version": "0.0.1",
+  "description": "Cross-platform BLE example application (mbed+JS/node.js)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mbed-js-gulp": "github:matthewelse/mbed-js-gulp"
+  },
+  "dependencies": {
+    "ble-peripheral": "matthewelse/ble-peripheral"
+  }
+}
