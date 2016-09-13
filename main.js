@@ -1,9 +1,16 @@
 var ble = require('ble-peripheral');
 
-var batterySrvcUUID = '180f';
-var batteryCharUUID = '2a19';
-var batteryChar = new ble.Characteristic(batteryCharUUID, ['read', 'notify'], 1);
-var batteryService = new ble.PrimaryService(batterySrvcUUID, [batteryChar]);
+var batterySrvcUUID = '180d';
+var batteryCharUUID = '2a37';
+var batteryChar = new ble.Characteristic({
+    uuid: batteryCharUUID,
+    properties: ['read', 'notify'],
+    value: null
+});
+var batteryService = new ble.PrimaryService({
+    uuid: batterySrvcUUID,
+    characteristics: [batteryChar]
+});
 var batteryLevel = 100;
 
 print('created variables');
@@ -13,15 +20,18 @@ ble.onConnection(function() {
 });
 
 ble.onDisconnection(function() {
+    print("disconnected");
     ble.startAdvertising();
 });
 
 ble.ready(function() {
     print("ble stack ready");
-    ble.addServices([
+    ble.setServices([
         batteryService
     ]);
-    ble.startAdvertising("Battery Device", [batterySrvcUUID]);
+    print("added services");
+    ble.startAdvertising("Heart Rate Device", [batterySrvcUUID]);
+    print("advertising");
 });
 
 setInterval(function() {
